@@ -20,6 +20,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation SupportLibraries.design
     implementation SupportLibraries.appcompat
     implementation SupportLibraries.constraintLayout
 
@@ -36,7 +37,6 @@ dependencies {
     debugImplementation DebugLibraries.leakCanaryPluginForFlipper
 
     androidTestImplementation TestLibraries.espressoCore
-    androidTestImplementation TesKtLibraries.espressoIntents
     androidTestImplementation TestLibraries.lifecycleTesting
     androidTestImplementation TestLibraries.koin
     androidTestImplementation TestLibraries.threetenabp
