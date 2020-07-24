@@ -1,3 +1,4 @@
 rootProject.name = "Employees"
 include ':app'
 include ':common-db'
+include ':commonDomain'
