@@ -30,6 +30,8 @@ sqldelight {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(Modules.commonDomain)
+
     implementation Libraries.koin
     
     implementation Libraries.threeTen

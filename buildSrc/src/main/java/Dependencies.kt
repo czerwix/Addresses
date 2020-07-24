@@ -6,6 +6,11 @@ object ApplicationId {
 
 object Modules {
     val app = ":app"
+
+    val commonDb = ":common-db"
+    val commonUi = ":common-ui"
+    val commonDomain = ":common-domain"
+    val commonData = ":common-data"
 }
 
 object Releases {

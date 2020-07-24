@@ -14,24 +14,34 @@ sealed class Result<out T> {
 
 inline infix fun <T> Result<T>.mapError(f: (EmployeeError) -> EmployeeError): Result<T> =
     when (this) {
-        is Result.Failure -> Result.Failure(f(error))
+        is Result.Failure -> Result.Failure(
+            f(error)
+        )
         is Result.Success -> this
     }
 
 inline infix fun <T, V2> Result<T>.map(f: (T) -> V2): Result<V2> = when (this) {
     is Result.Failure -> this
-    is Result.Success -> Result.Success(f(data))
+    is Result.Success -> Result.Success(
+        f(data)
+    )
 }
 
 inline infix fun <T, V2> Result<T>.mapCatching(f: (T) -> V2): Result<V2> = when (this) {
     is Result.Failure -> this
-    is Result.Success -> safeCall { f(data) }
+    is Result.Success -> safeCall {
+        f(
+            data
+        )
+    }
 }
 
 inline infix fun <T, V2> Result<Iterable<T>>.mapEach(f: (T) -> V2): Result<List<V2>> =
     when (this) {
         is Result.Failure -> this
-        is Result.Success -> Result.Success(data.map(f))
+        is Result.Success -> Result.Success(
+            data.map(f)
+        )
     }
 
 inline infix fun <T, V2> Result<T>.flatMap(f: (T) -> Result<V2>): Result<V2> = when (this) {
@@ -82,7 +92,8 @@ inline fun <T, A> Result<T>.fold(
 
 fun <T> success(data: T) = Result.Success(data)
 
-fun failure(fsaError: EmployeeError) = Result.Failure(fsaError)
+fun failure(fsaError: EmployeeError) =
+    Result.Failure(fsaError)
 
 @Suppress("TooGenericExceptionCaught")
 inline fun <T> safeCall(call: () -> T): Result<T> =
