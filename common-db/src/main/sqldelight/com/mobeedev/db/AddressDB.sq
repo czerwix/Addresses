@@ -1,0 +1,19 @@
+CREATE TABLE AddressDB (
+    addressId INTEGER PRIMARY KEY AUTOINCREMENT,
+    addressLine TEXT NOT NULL,
+    employeeId INTEGER,
+    FOREIGN KEY(employeeId) REFERENCES EmployeeDB(employeeId)
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO AddressDB(
+    addressId,
+    addressLine,
+    employeeId
+)VALUES(?,?,?);
+
+selectAddressByEmployee:
+SELECT * FROM AddressDB WHERE employeeId = ?;
+
+selectAllAddresses:
+SELECT * FROM EmployeeDB;
