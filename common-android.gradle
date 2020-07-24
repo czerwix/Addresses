@@ -26,6 +26,9 @@ dependencies {
     implementation Libraries.kotlin
 
     //di
-    implementation Libraries.koinAndroid
+    implementation Libraries.koin
+    implementation Libraries.koinScopes
     implementation Libraries.koinViewModel
+    implementation Libraries.koinAndroid
+    implementation Libraries.koinAndroidxExperimental
 }
