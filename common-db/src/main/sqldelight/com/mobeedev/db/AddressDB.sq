@@ -1,4 +1,4 @@
-CREATE TABLE AddressDB (
+CREATE TABLE IF NOT EXISTS AddressDB(
     addressId INTEGER PRIMARY KEY AUTOINCREMENT,
     addressLine TEXT NOT NULL,
     employeeId INTEGER,
@@ -7,13 +7,15 @@ CREATE TABLE AddressDB (
 
 insertOrReplace:
 INSERT OR REPLACE INTO AddressDB(
-    addressId,
     addressLine,
     employeeId
-)VALUES(?,?,?);
+)VALUES(?,?);
 
 selectAddressByEmployee:
 SELECT * FROM AddressDB WHERE employeeId = ?;
 
 selectAllAddresses:
-SELECT * FROM EmployeeDB;
+SELECT * FROM AddressDB;
+
+rowId:
+SELECT last_insert_rowid();

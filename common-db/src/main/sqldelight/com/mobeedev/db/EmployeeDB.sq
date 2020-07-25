@@ -1,24 +1,26 @@
 import org.threeten.bp.ZonedDateTime;
 
-CREATE TABLE EmployeeDB (
+CREATE TABLE IF NOT EXISTS EmployeeDB(
     employeeId INTEGER PRIMARY KEY AUTOINCREMENT,
     firstName TEXT NOT NULL,
     lastName TEXT NOT NULL,
     birthDate TEXT AS ZonedDateTime NOT NULL,
-    gender INTEGER AS Boolean NOT NULL DEFAULT 0
+    gender TEXT NOT NULL
 );
 
 insertOrReplace:
 INSERT OR REPLACE INTO EmployeeDB(
-    employeeId,
     firstName,
     lastName,
     birthDate,
     gender
-)VALUES(?,?,?,?,?);
+)VALUES(?,?,?,?);
 
 selectEmployeeById:
 SELECT * FROM EmployeeDB WHERE employeeId = ?;
 
-selectAllEmployees:
+selectAll:
 SELECT * FROM EmployeeDB;
+
+rowId:
+SELECT last_insert_rowid();
