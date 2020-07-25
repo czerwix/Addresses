@@ -1,5 +1,7 @@
 package com.mobeedev.db.entity
 
+import com.mobeedev.commonDomain.entity.Employee
+import com.mobeedev.commonDomain.entity.Gender
 import com.mobeedev.db.EmployeeDB
 import org.threeten.bp.ZonedDateTime
 
@@ -19,4 +21,22 @@ fun EmployeeDB.toEntity(addresses: List<AddressEntity>) = EmployeeEntity(
     birthDate = birthDate,
     gender = Gender.valueOf(gender),
     addresses = addresses
+)
+
+fun EmployeeEntity.toDomain() = Employee(
+    id = id,
+    firstName = firstName,
+    lastName = lastName,
+    birthDate = birthDate,
+    gender = gender,
+    addresses = addresses.map { it.toDomain() }
+)
+
+fun Employee.toEntity() = EmployeeEntity(
+    id = id,
+    firstName = firstName,
+    lastName = lastName,
+    birthDate = birthDate,
+    gender = gender,
+    addresses = addresses.map { it.toEntity() }
 )
