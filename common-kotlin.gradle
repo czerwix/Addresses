@@ -1,5 +1,35 @@
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply from: "$rootDir/common-android.gradle"
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 dependencies {
-    implementation Libraries.kotlin
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(Modules.commonDomain)
+    implementation project(Modules.commonUi)
+    implementation project(Modules.commonDb)
+
+    implementation project(EmployeesModules.domain)
+    implementation project(EmployeesModules.data)
+
+    implementation SupportLibraries.constraintLayout
+    implementation SupportLibraries.recyclerview
+    implementation SupportLibraries.design
+    implementation SupportLibraries.appcompat
+    implementation SupportLibraries.viewPager2
+    implementation SupportLibraries.swipeRefreshLayout
+
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationUi
+
+    kapt Libraries.epoxyProcessor
+    implementation Libraries.epoxy
+
+    implementation Libraries.threeTen
+
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.assertjCore
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.mvrx
+    testImplementation TestLibraries.koin
 }

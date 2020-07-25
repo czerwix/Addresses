@@ -2,3 +2,4 @@ rootProject.name = "Employees"
 include ':app',':common-db',':common-domain',':common-ui'
 
 include ':feature-employees-data',':feature-employees-domain'
+include ':feature-employees-ui'
