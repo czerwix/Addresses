@@ -1,4 +1,3 @@
 rootProject.name = "Employees"
-include ':app'
-include ':common-db'
-include ':common-domain'
+include ':app',':common-db',':common-domain',':common-ui'
+

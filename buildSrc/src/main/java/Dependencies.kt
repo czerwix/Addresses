@@ -10,7 +10,6 @@ object Modules {
     val commonDb = ":common-db"
     val commonUi = ":common-ui"
     val commonDomain = ":common-domain"
-    val commonData = ":common-data"
 }
 
 object Releases {
