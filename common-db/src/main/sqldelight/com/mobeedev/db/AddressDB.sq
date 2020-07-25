@@ -19,3 +19,6 @@ SELECT * FROM AddressDB;
 
 rowId:
 SELECT last_insert_rowid();
+
+removeById:
+DELETE FROM AddressDB WHERE employeeId = ?;

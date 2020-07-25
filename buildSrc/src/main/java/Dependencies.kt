@@ -12,6 +12,12 @@ object Modules {
     val commonDomain = ":common-domain"
 }
 
+object EmployeesModules {
+    val data = ":feature-employees-data"
+    val domain = ":feature-employees-domain"
+    val ui =":feature-employees-ui"
+}
+
 object Releases {
     val versionCode = 1
     val versionName = "1.0.0"

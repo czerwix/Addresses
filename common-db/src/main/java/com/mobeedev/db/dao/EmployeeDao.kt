@@ -42,4 +42,9 @@ class EmployeeDao(
         return employeesDBQueries.selectEmployeeById(employeeId).executeAsOne().toEntity(addresses)
     }
 
+    fun removeById(employeeId: Long) = employeeId.let {
+        addressDao.removeById(it)
+        employeesDBQueries.removeById(it)
+    }
+
 }

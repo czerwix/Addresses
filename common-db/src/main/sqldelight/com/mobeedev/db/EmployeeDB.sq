@@ -24,3 +24,6 @@ SELECT * FROM EmployeeDB;
 
 rowId:
 SELECT last_insert_rowid();
+
+removeById:
+DELETE FROM EmployeeDB WHERE employeeId = ?;

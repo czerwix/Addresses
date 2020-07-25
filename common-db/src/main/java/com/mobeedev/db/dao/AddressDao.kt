@@ -18,4 +18,6 @@ class AddressDao(private val addressQueries: AddressDBQueries) {
 
     fun selectByEmployee(employeeId: Long) =
         addressQueries.selectAddressByEmployee(employeeId).executeAsList().map { it.toEntity() }
+
+    fun removeById(employeeId: Long) = addressQueries.removeById(employeeId)
 }
