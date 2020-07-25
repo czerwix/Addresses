@@ -2,7 +2,6 @@ apply from: "$rootDir/common-kotlin.gradle"
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-
     implementation project(Modules.commonDomain)
     implementation project(Modules.commonDb)
     implementation project(EmployeesModules.domain)

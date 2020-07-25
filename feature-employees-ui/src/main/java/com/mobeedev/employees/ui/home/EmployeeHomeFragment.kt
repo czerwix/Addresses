@@ -15,8 +15,10 @@ class EmployeeHomeFragment : BaseFragment() {
 
     private val employeeViewModel: EmployeeViewModel by activityViewModel()
 
-    private val epoxyController = EmployeeEpoxyController()
-    // TODO: 25/07/2020 create epoxy controller or use simple controller
+    private val epoxyController = EmployeeEpoxyController(
+        {},// TODO: 25/07/2020 add logic
+        {}// TODO: 25/07/2020  add logic
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
