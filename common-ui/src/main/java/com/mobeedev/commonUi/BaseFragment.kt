@@ -14,6 +14,7 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.withState
 import com.fieldcode.commonUi.mvrx.MvRxViewModel
+import com.mobeedev.commonDomain.doNothing
 import timber.log.Timber
 
 abstract class BaseFragment : BaseMvRxFragment() {
@@ -84,6 +85,16 @@ abstract class BaseFragment : BaseMvRxFragment() {
         super.onStart()
 
         Timber.tag(javaClass.simpleName).v("on_Start")
+    }
+
+    fun onRecyclerViewDetached(view: RecyclerView) {
+        view.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewDetachedFromWindow(v: View?) {
+                view.adapter = null
+            }
+
+            override fun onViewAttachedToWindow(v: View?) = doNothing
+        })
     }
 }
 
