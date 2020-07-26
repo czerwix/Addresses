@@ -25,6 +25,7 @@ dependencies {
     implementation Libraries.epoxy
 
     implementation Libraries.threeTen
+    implementation Libraries.timber
 
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.assertjCore

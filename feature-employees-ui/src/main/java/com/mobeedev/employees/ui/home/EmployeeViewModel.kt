@@ -1,22 +1,22 @@
 package com.mobeedev.employees.ui.home
 
-import com.fieldcode.commonUi.mvrx.KoinMvRxViewModelFactory
-import com.fieldcode.commonUi.mvrx.MvRxViewModel
 import com.mobeedev.commonDomain.entity.Employee
-import com.mobeedev.employees.domain.usecase.*
+import com.mobeedev.commonUi.mvrx.KoinMvRxViewModelFactory
+import com.mobeedev.commonUi.mvrx.MvRxViewModel
+import com.mobeedev.employees.domain.usecase.GetEmployeesUseCase
+import com.mobeedev.employees.domain.usecase.RemoveEmployeeUseCase
+import com.mobeedev.employees.domain.usecase.SearchByNameUseCase
 import com.mobeedev.employees.entity.EmployeeItem
 import com.mobeedev.employees.entity.toItemList
 
 class EmployeeViewModel(
     state: EmployeeState,
     private val getEmployeesUseCase: GetEmployeesUseCase,
-    private val getEmployeeUseCase: GetEmployeeUseCase,
     private val removeEmployeeUseCase: RemoveEmployeeUseCase,
-    private val saveEmployeeUseCase: SaveEmployeeUseCase,
-    private val updateEmployeeUseCase: UpdateEmployeeUseCase
+    private val searchByNameUseCase: SearchByNameUseCase
 ) : MvRxViewModel<EmployeeState>(state) {
 
-    init {
+    fun init() {
         getEmployeesUseCase.execute(
             mapper = List<Employee>::toItemList,
             stateReducer = {
@@ -30,6 +30,23 @@ class EmployeeViewModel(
             val newEmployees = employees.toMutableList()
             newEmployees.remove(employee)
             copy(employees = newEmployees)
+        }
+    }
+
+    fun searchEmployee(search: String) {
+        if (search.isBlank()) {
+            getEmployeesUseCase.execute(
+                mapper = List<Employee>::toItemList,
+                stateReducer = {
+                    copy(employees = it() ?: employees)
+                }
+            )
+        } else {
+            searchByNameUseCase.execute(
+                params = SearchByNameUseCase.Params(search),
+                mapper = List<Employee>::toItemList,
+                stateReducer = { copy(employees = it() ?: employees) }
+            )
         }
     }
 

@@ -12,3 +12,8 @@ fun Address.toItem() = AddressItem(
     id = id,
     address = address
 )
+
+fun AddressItem.toDomain() = Address(
+    id = id,
+    address = address
+)

@@ -33,4 +33,8 @@ class EmployeeRepositoryImpl(
         employeeLocalDataSource.getEmployee(employeeId).toDomain()
     }
 
+    override suspend fun searchByName(search: String): Result<List<Employee>> = safeCall {
+        employeeLocalDataSource.searchName(search)
+    }.map { it.map(EmployeeEntity::toDomain) }
+
 }

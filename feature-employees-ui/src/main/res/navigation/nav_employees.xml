@@ -25,9 +25,10 @@
         android:label="EditEmployeeFragment" >
         <argument
             android:name="employeeId"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="-1L" />
         <action
-            android:id="@+id/goToDisplay"
+            android:id="@+id/goToHome"
             app:destination="@id/employeeHomeFragment" />
     </fragment>
 </navigation>

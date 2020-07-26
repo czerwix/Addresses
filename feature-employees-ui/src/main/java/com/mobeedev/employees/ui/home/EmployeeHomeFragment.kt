@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.withState
 import com.mobeedev.commonUi.BaseFragment
@@ -18,7 +19,11 @@ class EmployeeHomeFragment : BaseFragment() {
     private val epoxyController = EmployeeEpoxyController(
         { employeeViewModel.removeEmployee(it) },
         {
-            // TODO: 26/07/2020 navigate to add/edit screen  findNavController().navigate(R.id.goToAddEdit)
+            findNavController().navigate(
+                EmployeeHomeFragmentDirections.goToEdit(
+                    employeeId = it.id!!
+                )
+            )
         }
     )
 
@@ -32,9 +37,17 @@ class EmployeeHomeFragment : BaseFragment() {
         return inflater.inflate(R.layout.employees_home_fragment, container, false).apply {
             recyclerEmployees.setController(epoxyController)
             fabAdd.setOnClickListener {
-                // TODO: 26/07/2020 navigate to add/edit screen  findNavController().navigate(R.id.goToAddEdit)
+                findNavController().navigate(
+                    EmployeeHomeFragmentDirections.goToEdit()
+                )
             }
+            buttonSearch.setOnClickListener { employeeViewModel.searchEmployee(editTextSearch.text.toString()) }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        employeeViewModel.init()
     }
 
     override fun invalidate() = withState(employeeViewModel) { state ->

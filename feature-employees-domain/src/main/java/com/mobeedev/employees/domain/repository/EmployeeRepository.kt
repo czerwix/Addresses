@@ -13,4 +13,6 @@ interface EmployeeRepository {
     suspend fun getAllEmployees(): Result<List<Employee>>
 
     suspend fun getEmployee(employeeId: Long): Result<Employee>
+
+    suspend fun searchByName(search: String): Result<List<Employee>>
 }

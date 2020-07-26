@@ -17,12 +17,11 @@ class EmployeeEpoxyController(
                 onRemoveClicked(onRemoveLongClicked)
                 onEditClicked(onEditClicked)
                 employeeItem(it)
-
-                it.addresses.forEach {
-                    addressView {
-                        id(it.id)
-                        addressItem(it)
-                    }
+            }
+            it.addresses.forEach {
+                addressView {
+                    id(it.id)
+                    addressItem(it)
                 }
             }
         }

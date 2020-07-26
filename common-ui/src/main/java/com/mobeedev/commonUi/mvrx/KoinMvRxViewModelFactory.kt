@@ -1,4 +1,4 @@
-package com.fieldcode.commonUi.mvrx
+package com.mobeedev.commonUi.mvrx
 
 import androidx.lifecycle.ViewModelStoreOwner
 import com.airbnb.mvrx.ActivityViewModelContext

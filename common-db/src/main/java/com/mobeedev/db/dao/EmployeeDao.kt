@@ -47,4 +47,16 @@ class EmployeeDao(
         employeesDBQueries.removeById(it)
     }
 
+    fun searchName(search: String): MutableList<EmployeeEntity> {
+        val employeesDb = employeesDBQueries.searchByName("%$search%", "%$search%").executeAsList()
+        val employeeEntityList = mutableListOf<EmployeeEntity>()
+
+        employeesDb.forEach {
+            val addresses = addressDao.selectByEmployee(it.employeeId)
+            employeeEntityList.add(it.toEntity(addresses))
+        }
+
+        return employeeEntityList
+    }
+
 }

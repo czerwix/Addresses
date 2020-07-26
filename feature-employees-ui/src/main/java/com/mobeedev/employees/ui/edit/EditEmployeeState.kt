@@ -8,5 +8,6 @@ import org.threeten.bp.ZonedDateTime
 data class EditEmployeeState(
     val employee: EmployeeItem? = null,
     val addresses: List<AddressItem> = emptyList(),
-    val birthDate: ZonedDateTime = ZonedDateTime.now()
+    val birthDate: ZonedDateTime = ZonedDateTime.now(),
+    val navigationEventGoToHome: Boolean = false
 ) : MvRxState

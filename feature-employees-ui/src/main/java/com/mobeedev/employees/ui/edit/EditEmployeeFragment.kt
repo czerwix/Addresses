@@ -3,24 +3,27 @@ package com.mobeedev.employees.ui.edit
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.UniqueOnly
 import com.airbnb.mvrx.fragmentViewModel
-import com.mobeedev.commonDomain.doNothing
+import com.airbnb.mvrx.withState
+import com.google.android.material.snackbar.Snackbar
 import com.mobeedev.commonDomain.entity.Gender
 import com.mobeedev.commonUi.BaseFragment
 import com.mobeedev.commonUi.simpleController
 import com.mobeedev.commonUi.utils.getDayMonthYearString
-import com.mobeedev.employees.MainActivity
 import com.mobeedev.employees.entity.EmployeeItem
 import com.mobeedev.employees.ui.R
 import com.mobeedev.employees.ui.edit.view.addressEditView
 import kotlinx.android.synthetic.main.employees_edit_fragment.*
+import kotlinx.android.synthetic.main.employees_edit_fragment.view.*
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import java.util.*
@@ -48,8 +51,8 @@ class EditEmployeeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        args?.let {
-            editEmployeeViewModel.getEmployee(it) // TODO: 26/07/2020 fix
+        if (args.employeeId != -1L) {
+            editEmployeeViewModel.getEmployee(args.employeeId)
         }
     }
 
@@ -79,9 +82,21 @@ class EditEmployeeFragment : BaseFragment() {
                     editTextAddress.text.toString()
                 )
             }
+
+            fabDone.setOnClickListener {
+                if (validateData()) {
+                    editEmployeeViewModel.addEmployee(
+                        editTextFirstName.text.toString(),
+                        editTextLastName.text.toString(),
+                        Gender.valueOf(
+                            spinnerGender.getItemAtPosition(spinnerGender.selectedItemPosition)
+                                .toString()
+                        )
+                    )
+                }
+            }
         }
     }
-    //todo get gender from spinner Gender.valueOf(spinnerGender.getItemAtPosition(spinnerGender.selectedItemPosition).toString())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -95,7 +110,14 @@ class EditEmployeeFragment : BaseFragment() {
         }
     }
 
-    override fun invalidate() = doNothing
+    override fun invalidate() = withState(editEmployeeViewModel) { state ->
+        buttonBirthDate.text = state.birthDate.getDayMonthYearString()
+        epoxyController.requestModelBuild()
+
+        if (state.navigationEventGoToHome) {
+            findNavController().navigate(R.id.goToHome)
+        }
+    }
 
     private fun setUpEmployeeData(employee: EmployeeItem?) {
         employee?.apply {
@@ -112,7 +134,7 @@ class EditEmployeeFragment : BaseFragment() {
     }
 
     private fun openDatePicker() {
-        val calendar: Calendar = Calendar.getInstance().apply {
+        Calendar.getInstance().apply {
             val day = get(Calendar.DAY_OF_MONTH)
             val month = get(Calendar.MONTH)
             val year = get(Calendar.YEAR)
@@ -138,4 +160,28 @@ class EditEmployeeFragment : BaseFragment() {
             picker.show()
         }
     }
+
+    private fun validateData(): Boolean {
+        if (editTextFirstName.text.isBlank()) {
+            showSnackBar(getString(R.string.first_name_blank))
+            return false
+        } else if (editTextLastName.text.isBlank()) {
+            showSnackBar(getString(R.string.last_name_blank))
+            return false
+        }
+        var addressesValid = true
+        withState(editEmployeeViewModel) { state ->
+            if (state.addresses.isEmpty()) {
+                showSnackBar(getString(R.string.address_empty))
+                addressesValid = false
+            }
+        }
+        if (addressesValid.not()) return false
+
+        return true
+    }
+
+    fun showSnackBar(message: String) =
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+
 }

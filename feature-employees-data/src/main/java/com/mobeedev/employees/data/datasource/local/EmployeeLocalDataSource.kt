@@ -17,5 +17,7 @@ class EmployeeLocalDataSource(
     fun getAllEmployees() = employeeDao.selectAll()
 
     fun getEmployee(employeeId: Long) = employeeDao.selectById(employeeId)
+
+    fun searchName(search: String) = employeeDao.searchName(search)
 }
 

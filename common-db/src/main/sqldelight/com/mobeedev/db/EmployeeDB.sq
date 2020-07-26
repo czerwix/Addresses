@@ -27,3 +27,8 @@ SELECT last_insert_rowid();
 
 removeById:
 DELETE FROM EmployeeDB WHERE employeeId = ?;
+
+searchByName:
+SELECT * FROM EmployeeDB
+WHERE
+firstName LIKE ? OR lastName LIKE ?;

@@ -8,6 +8,7 @@ import com.airbnb.epoxy.AfterPropsSet
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.mobeedev.commonUi.utils.getDayMonthYearString
 import com.mobeedev.employees.entity.EmployeeItem
 import com.mobeedev.employees.ui.R
 import kotlinx.android.synthetic.main.employee_single_element.view.*
@@ -34,7 +35,7 @@ class EmployeeView @JvmOverloads constructor(
     fun setUp() {
         with(employeeItem!!) {
             textEmployeeName.text = "$firstName $lastName"
-            textBirthDate.text = birthDate.toString()
+            textBirthDate.text = birthDate.getDayMonthYearString()
             textGender.text = gender.toString()
 
             buttonEdit.setOnClickListener { onEditClicked?.invoke(this) }

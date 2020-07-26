@@ -5,6 +5,8 @@ import com.mobeedev.employees.data.datasource.local.EmployeeLocalDataSource
 import com.mobeedev.employees.data.repository.EmployeeRepositoryImpl
 import com.mobeedev.employees.domain.repository.EmployeeRepository
 import com.mobeedev.employees.domain.usecase.*
+import com.mobeedev.employees.ui.edit.EditEmployeeState
+import com.mobeedev.employees.ui.edit.EditEmployeeViewModel
 import com.mobeedev.employees.ui.home.EmployeeState
 import com.mobeedev.employees.ui.home.EmployeeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -27,6 +29,7 @@ private val useCaseModule = module {
     factory { RemoveEmployeeUseCase(employeeRepository = get()) }
     factory { SaveEmployeeUseCase(employeeRepository = get()) }
     factory { UpdateEmployeeUseCase(employeeRepository = get()) }
+    factory { SearchByNameUseCase(employeeRepository = get()) }
 }
 
 private val repositoryModule = module {
@@ -42,10 +45,15 @@ private val viewModelModule = module {
         EmployeeViewModel(
             state,
             getEmployeesUseCase = get(),
-            getEmployeeUseCase = get(),
             removeEmployeeUseCase = get(),
-            saveEmployeeUseCase = get(),
-            updateEmployeeUseCase = get()
+            searchByNameUseCase = get()
+        )
+    }
+    viewModel { (state: EditEmployeeState) ->
+        EditEmployeeViewModel(
+            state,
+            getEmployeeUseCase = get(),
+            saveEmployeeUseCase = get()
         )
     }
 }

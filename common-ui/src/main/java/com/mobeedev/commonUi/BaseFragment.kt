@@ -13,7 +13,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.withState
-import com.fieldcode.commonUi.mvrx.MvRxViewModel
+import com.mobeedev.commonUi.mvrx.MvRxViewModel
 import com.mobeedev.commonDomain.doNothing
 import timber.log.Timber
 
