@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_employees">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_employees"
+    app:startDestination="@id/employeeHomeFragment">
 
+    <fragment
+        android:id="@+id/employeeHomeFragment"
+        android:name="com.mobeedev.employees.ui.home.EmployeeHomeFragment"
+        android:label="EmployeeHomeFragment"
+        tools:layout="@layout/employees_home_fragment">
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="mobeedev://employees" />
+
+    </fragment>
 </navigation>

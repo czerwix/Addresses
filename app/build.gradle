@@ -41,6 +41,9 @@ dependencies {
 
     implementation Libraries.mvrx
 
+    implementation Libraries.threeTen
+    implementation Libraries.timber
+
     implementation Libraries.sqldelightAndroidDriver
 
     debugImplementation DebugLibraries.leakCanaryAndroid

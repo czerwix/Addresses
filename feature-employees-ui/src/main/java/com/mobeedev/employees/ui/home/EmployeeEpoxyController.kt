@@ -11,8 +11,6 @@ class EmployeeEpoxyController(
 ) : TypedEpoxyController<List<EmployeeItem>>() {
 
     override fun buildModels(data: List<EmployeeItem>) {
-        if (data.isEmpty()) return
-
         data.forEach {
             employeeView {
                 id(it.id)
