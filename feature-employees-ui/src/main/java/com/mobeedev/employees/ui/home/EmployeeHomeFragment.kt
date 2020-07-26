@@ -16,8 +16,10 @@ class EmployeeHomeFragment : BaseFragment() {
     private val employeeViewModel: EmployeeViewModel by activityViewModel()
 
     private val epoxyController = EmployeeEpoxyController(
-        {},// TODO: 25/07/2020 add logic
-        {}// TODO: 25/07/2020  add logic
+        { employeeViewModel.removeEmployee(it) },
+        {
+            // TODO: 26/07/2020 navigate to add/edit screen  findNavController().navigate(R.id.goToAddEdit)
+        }
     )
 
     override fun onCreateView(
@@ -29,10 +31,14 @@ class EmployeeHomeFragment : BaseFragment() {
 
         return inflater.inflate(R.layout.employees_home_fragment, container, false).apply {
             recyclerEmployees.setController(epoxyController)
+            fabAdd.setOnClickListener {
+                // TODO: 26/07/2020 navigate to add/edit screen  findNavController().navigate(R.id.goToAddEdit)
+            }
         }
     }
 
     override fun invalidate() = withState(employeeViewModel) { state ->
+        epoxyController.setData(state.employees)
     }
 
     override fun onDestroyView() {

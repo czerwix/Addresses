@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:src="@drawable/ic_person_outline_24px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:hint="@string/first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageEmployee"
+        app:layout_constraintTop_toTopOf="@id/imageEmployee" />
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:hint="@string/last_name"
+        app:layout_constraintEnd_toEndOf="@id/editTextFirstName"
+        app:layout_constraintStart_toStartOf="@id/editTextFirstName"
+        app:layout_constraintTop_toBottomOf="@id/editTextFirstName" />
+
+    <Button
+        android:id="@+id/buttonBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintStart_toStartOf="@id/editTextLastName"
+        app:layout_constraintTop_toBottomOf="@id/editTextLastName"
+        tools:text="15.10.1995" />
+
+    <Spinner
+        android:id="@+id/spinnerGender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        app:layout_constraintEnd_toEndOf="@id/editTextFirstName"
+        app:layout_constraintStart_toStartOf="@id/editTextFirstName"
+        app:layout_constraintTop_toBottomOf="@id/buttonBirthDate" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:hint="@string/address"
+        app:layout_constraintEnd_toStartOf="@id/buttonAddAddress"
+        app:layout_constraintStart_toStartOf="@id/editTextFirstName"
+        app:layout_constraintTop_toBottomOf="@id/spinnerGender" />
+
+    <Button
+        android:id="@+id/buttonAddAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:text="@string/add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerGender" />
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/recyclerAddress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddAddress"
+            tools:listitem="@layout/address_edit_single_element"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:background="@drawable/circle_background"
+        android:contentDescription="@string/add"
+        android:src="@drawable/ic_done_24px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

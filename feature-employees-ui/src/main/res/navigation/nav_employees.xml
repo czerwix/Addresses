@@ -14,6 +14,20 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="mobeedev://employees" />
+        <action
+            android:id="@+id/goToEdit"
+            app:destination="@id/editEmployeeFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/editEmployeeFragment"
+        android:name="com.mobeedev.employees.ui.edit.EditEmployeeFragment"
+        android:label="EditEmployeeFragment" >
+        <argument
+            android:name="employeeId"
+            app:argType="long" />
+        <action
+            android:id="@+id/goToDisplay"
+            app:destination="@id/employeeHomeFragment" />
     </fragment>
 </navigation>
