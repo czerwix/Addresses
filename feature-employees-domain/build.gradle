@@ -5,6 +5,4 @@ dependencies {
     implementation Libraries.threeTen
     implementation Libraries.kotlinCoroutines
 
-    implementation TestLibraries.junit
-    implementation TestLibraries.mockk
 }

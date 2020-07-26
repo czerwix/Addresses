@@ -26,12 +26,4 @@ dependencies {
     api Libraries.epoxy
 
     kapt Libraries.epoxyProcessor
-
-    testImplementation TestLibraries.threetenabp
-    testImplementation TestLibraries.junit
-    testImplementation TestLibraries.assertjCore
-    testImplementation TestLibraries.mockk
-    testImplementation TestLibraries.mvrx
-    testImplementation TestLibraries.koin
-
 }

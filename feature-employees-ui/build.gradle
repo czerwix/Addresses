@@ -26,10 +26,4 @@ dependencies {
 
     implementation Libraries.threeTen
     implementation Libraries.timber
-
-    testImplementation TestLibraries.junit
-    testImplementation TestLibraries.assertjCore
-    testImplementation TestLibraries.mockk
-    testImplementation TestLibraries.mvrx
-    testImplementation TestLibraries.koin
 }
